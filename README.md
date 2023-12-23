@@ -19,7 +19,7 @@ Once you have uploaded the sample dataset in you Atlas Cluster, you can run enco
 python3 encoder.py
 ```
 
-## Load sample data
+## Download the quantized Llama2 LLM locally from Huggingface
 
 Download the model from hugging face by following this [documentation](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF#how-to-download-gguf-files)
 
