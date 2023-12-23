@@ -7,25 +7,36 @@ from langchain.vectorstores import MongoDBAtlasVectorSearch
 from langchain.embeddings import HuggingFaceEmbeddings
 from pymongo import MongoClient
 
-uri="mongodb+srv://xxx:xxx@cluster-xyz.mongodb.net/?retryWrites=true&w=majority"
+# Input mongo conn string and init the mongo client
+uri = "mongodb+srv://user:password@<xxx>.mongodb.net/?retryWrites=true&w=majority"
 client = MongoClient(uri)
 
 db_name = "sample_mflix"
 collection_name = "movies"
 collection = client[db_name][collection_name]
 
+# define the text embedding model (encoder)
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-index_name = "vector_search_index"
-vector_field_name = "vector"
+index_name = "vector_index"
+vector_field_name = "plot_embedding_hf"
 text_field_name = "title"
 
-vectorStore = MongoDBAtlasVectorSearch(collection=collection,embedding=embeddings, index_name=index_name, embedding_key=vector_field_name, text_key=text_field_name)
-query = "Give me some movies about race cars"
-#query = "What is the name of the movie where Paolo Picello is trying to build an AI to answer questions?"
+# specify the mongodb atlas database and collection you plan to search on, along with the search index created, the fields where the embeddings are stored and the text field you want to retrieve from
+vectorStore = MongoDBAtlasVectorSearch(
+    collection=collection,
+    embedding=embeddings,
+    index_name=index_name,
+    embedding_key=vector_field_name,
+    text_key=text_field_name,
+)
+
+# specify the user's query here
+query = "Give me some movies about racing"
 
 # Callbacks support token-wise streaming
 callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
 
+# Run the LLM (quantized local version by The Bloke's)
 llm = LlamaCpp(
     model_path="models/llama-2-7b-chat.Q2_K.gguf",
     temperature=0.75,
@@ -35,13 +46,15 @@ llm = LlamaCpp(
     verbose=True,  # Verbose is required to pass to the callback manager
 )
 
+# Run the vector search and limit the number of results to 1 to reduce number of tokens returned since its a quantized version for demo purposes only
 retriever = vectorStore.as_retriever(search_kwargs={"k": 1})
 
 print("\n")
 print("\n")
-print("User Query: \"" + query + "\"")
+print('User Query: "' + query + '"')
 print("\n")
 
+# Define the chain type and retriever (vector store) for the QA chain.
 qa = RetrievalQA.from_chain_type(llm, chain_type="stuff", retriever=retriever)
 
 # Execute the chain
