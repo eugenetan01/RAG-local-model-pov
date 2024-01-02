@@ -45,6 +45,10 @@ Create the following search index on the `sample_mflix.movies` collection:
 
 <a id="test1"></a>
 
+## Download the quantized Llama2 LLM locally from Huggingface
+
+Run the streamlit app with `streamlit run main.py`
+
 ## RAG: Example 1
 
 In this first example we are going to ask our LLM to give suggestions about movies. The app will first compute the vector from the user query, this vector will be used by Atlas Search to identify the most relevant results. These results are then sent to the LLM for the answer generation.
@@ -72,7 +76,7 @@ This is the fake movie document:
 
 We can then ask the LLM something like:
 
-> What is the name of the movie where Paolo Picello is trying to build an AI to answer questions?
+> give me some movies about racing
 
 ![](/docs/test-rag-fake-movie.gif?raw=true)
 
