@@ -54,20 +54,16 @@ def main():
     # Retrieve context data from MongoDB Atlas Vector Search
     retriever = vectorStore.as_retriever(search_kwargs={"k": 1})  # Modify this line
 
-    # Display context data
-    # st.text("Context Data:")
-    # st.text(retriever)
-
     # Query LLM with user input and context data
     if st.button("Query LLM"):
         with st.spinner("Querying LLM..."):
-            # pass  # Add a loading spinner here
+            # Create the chain ( retriever + LLM )
             qa = RetrievalQA.from_chain_type(
                 llm, chain_type="stuff", retriever=retriever
             )
             # Execute the chain
             response = qa.run(query)
-            st.text("LLM Response:")
+            st.text("Llama2 Response:")
             st.text(response)
 
 
