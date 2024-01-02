@@ -45,39 +45,10 @@ Create the following search index on the `sample_mflix.movies` collection:
 
 <a id="test1"></a>
 
-## Download the quantized Llama2 LLM locally from Huggingface
+## Run the streamlit app to query the LLM
 
 Run the streamlit app with `streamlit run main.py`
-
-## RAG: Example 1
-
-In this first example we are going to ask our LLM to give suggestions about movies. The app will first compute the vector from the user query, this vector will be used by Atlas Search to identify the most relevant results. These results are then sent to the LLM for the answer generation.
-
-> Give me some movies about race cars
-
-![](/docs/test-rag.gif?raw=true)
-
-As you can see the system is using the information coming from the Vector Store to answer the user question.
-
-<a id="test2"></a>
-
-## RAG: Example 2
-
-In this second example we are going to first of all insert a fake document in our collection, compute the embeddings, and then we are going to ask a question about this movie to prove that our LLM is actually using the information coming from the Vector Store.
-
-This is the fake movie document:
-
-```json
-{
-  "fullplot": "The Fake movie. This fictitious movie was created by Paolo Picello, an italian computer engineer. Paolo is trying to build an AI that can answer questions around popular movies and is trying to do so with MongoDB Atlas, Langchain and Llama 2, an open source large language.",
-  "title": "The Fake Movie"
-}
-```
 
 We can then ask the LLM something like:
 
 > give me some movies about racing
-
-![](/docs/test-rag-fake-movie.gif?raw=true)
-
-As you can see the system is able to give me the correct name of the movie, even if this movie does not really exist (it was not in the training data for the LLM).
