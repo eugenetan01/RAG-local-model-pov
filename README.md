@@ -65,14 +65,14 @@ This is the fake movie document:
 
 ```json
 {
-  "fullplot": "The Fake movie. This fictitious movie was created by Eugene, a software engineer. Eugene is trying to build an AI that can answer questions around popular movies and is trying to do so with MongoDB Atlas, Langchain and Llama 2, an open source large language.",
+  "fullplot": "The Fake movie. This fictitious movie was created by Paolo Picello, an italian computer engineer. Paolo is trying to build an AI that can answer questions around popular movies and is trying to do so with MongoDB Atlas, Langchain and Llama 2, an open source large language.",
   "title": "The Fake Movie"
 }
 ```
 
 We can then ask the LLM something like:
 
-> What is the name of the movie where Eugene is trying to build an AI to answer questions?
+> What is the name of the movie where Paolo Picello is trying to build an AI to answer questions?
 
 ![](/docs/test-rag-fake-movie.gif?raw=true)
 
