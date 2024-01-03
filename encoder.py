@@ -1,7 +1,8 @@
 from sentence_transformers import SentenceTransformer
 import pymongo
+import config
 
-mongo_uri = "mongodb+srv://user:password@<xxx>.mongodb.net/?retryWrites=true&w=majority"
+mongo_uri = config.mongo_uri
 db = "sample_mflix"
 collection = "movies"
 
