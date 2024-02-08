@@ -1,2 +1,8 @@
 models
 config.py
+terraform*
+.terraform*
+deploy.tf
+Dockerfile
+deploy.sh
+__pycache__
