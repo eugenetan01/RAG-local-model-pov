@@ -20,7 +20,7 @@ for x in collection.find({"plot_embedding_hf": {"$exists": False}}, {}).limit(10
             title = x["title"]
             print("computing vector.. title: " + title)
             text = title
-
+            fullplot = None
             # if fullpplot field present, concat it with title
             if "fullplot" in x.keys():
                 fullplot = x["fullplot"]
